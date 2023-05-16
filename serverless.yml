@@ -1,0 +1,23 @@
+service: serverless-middleware
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  api:
+    handler: handlers/user-list-api.handler
+    events:
+      - http:
+          path: /users
+          method: get
+  api2:
+    handler: handlers/user-profile-api.handler
+    events:
+      - http:
+          path: /users/{id}
+          method: get
+
+plugins:
+  - serverless-offline
